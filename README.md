@@ -8,7 +8,7 @@ Programmatically refresh Power BI datasets using Selenium (Opening Chrome in hea
 - Clone this repository:
 
 ```bash
-git clone git@gitlab.id.vin:truong.hoang/pbi_refresher.git
+git clone git@github.com:truonghm/pbi_refresher.git
 ```
 
 - Create a new environment and install packages from `requirements.txt`
@@ -28,7 +28,7 @@ pbi_config = dict(
         username = 'account1',
         password = 'pw12312312312312'
     ),
-    anh_cuong = dict(
+    afsdf = dict(
         username = 'account2',
         password = 'pw14t00af0234023'
     )
@@ -41,18 +41,11 @@ pbi_config = dict(
 
 ### Default setting
 
-Datasets can be added at the [following google sheet](https://docs.google.com/spreadsheets/d/1A2YQOSySyg0Ajhd2tVfqNIs1uqqO4wg8zwzvxXIUjnw/edit#gid=0).
-
-| id  | report_name | dataset_url                                                           | default_frequency | active_status |
-| --- | ----------- | --------------------------------------------------------------------- | ----------------- | :-----------: |
-| 1   | Report 1    | https://app.powerbi.com/groups/workspace_1/datasets/dataset_1/details | TRUE              |       A       |
-| 2   | Report 2    | https://app.powerbi.com/groups/workspace_2/datasets/dataset_2/details | TRUE              |       A       |
-| 3   | Report 3    | https://app.powerbi.com/groups/workspace_3/datasets/dataset_3/details | TRUE              |       I       |
-
-When the script is called without arguments, datasets with `default_frequency` set to `TRUE` will be refreshed.
+Datasets can be added to a csv file inside `url` directory. The csv file should contain 2 columns separated by comma: id and dataset url.
+Afterward, pbi_refresher can be trigger via the command line:
 
 ```bash
-python pbi_refresher.py
+python pbi_refresher.py --filename=schedule1 --headless=True
 ```
 
 ### Specifying arguments
@@ -60,7 +53,7 @@ python pbi_refresher.py
 When the script is called WITH arguments, i.e. `--dataset_id=1,2,3,4`, only datsets with `default_frequency` set to `FALSE`, and with `id` specified in the argument will be refreshed.
 
 ```bash
-python pbi_refresher.py --dataset_id=16 --pbi_config=admin headless=True alert=failed_only
+python pbi_refresher.py --dataset_id=16 --pbi_config=profile1 headless=True alert=failed_only --filename=schedule1
 ```
 
 In this example:
